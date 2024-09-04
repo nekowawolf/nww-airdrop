@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 
-	"iteung/config"
+	"github.com/nekowawolf/nww-airdrop/config"
 
 	"github.com/aiteung/musik"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
 
-	"iteung/url"
+	"github.com/nekowawolf/nww-airdrop/url"
 
 	"github.com/gofiber/fiber/v2"
 )
