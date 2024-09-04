@@ -1,0 +1,34 @@
+#Setting environment variable runner
+variables:
+  GIT_DEPTH: 1
+
+
+stages:
+  - build
+  - deploy
+
+
+build-docker:
+  only:
+    - main
+  stage: build
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:prod-latest -f Dockerfile .
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:prod-latest
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:prod-latest
+    - docker-compose -f docker-compose.yml up -d
+    - docker image prune -f
+

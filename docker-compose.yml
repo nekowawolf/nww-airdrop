@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  new_project:
+    image: $CI_REGISTRY_IMAGE:latest
+    container_name: new_project
+    ports:
+      - "8080:8080"
