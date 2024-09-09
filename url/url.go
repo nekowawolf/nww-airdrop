@@ -7,8 +7,6 @@ import (
 )
 
 func Web(page *fiber.App) {
-	// page.Post("/api/whatsauth/request", controller.PostWhatsAuthRequest)  //API from user whatsapp message from iteung gowa
-	// page.Get("/ws/whatsauth/qr", websocket.New(controller.WsWhatsAuthQR)) //websocket whatsauth
 
 	page.Get("/", controller.Sink)
 	page.Post("/", controller.Sink)
@@ -17,4 +15,17 @@ func Web(page *fiber.App) {
 	page.Delete("/", controller.Sink)
 	page.Options("/", controller.Sink)
 
+	page.Get("/checkip", controller.Homepage)
+	page.Get("/freeairdrop", controller.GetAirdropFreeHandler)
+	page.Get("/paidairdrop", controller.GetAirdropPaidHandler)
+	page.Get("/allairdrop", controller.GetAllAirdropHandler)
+	page.Get("/freeairdrop/:id", controller.GetAirdropFreeByIDHandler)
+	page.Get("/paidairdrop/:id", controller.GetAirdropPaidByIDHandler)
+	page.Post("/freeairdrop", controller.InsertAirdropFreeHandler)
+	page.Post("/paidairdrop", controller.InsertAirdropPaidHandler)
+	page.Put("/freeairdrop/:id", controller.UpdateAirdropFreeByIDHandler)
+    page.Put("/paidairdrop/:id", controller.UpdateAirdropPaidByIDHandler)
+	page.Delete("/freeairdrop/:id", controller.DeleteAirdropFreeByIDHandler)
+    page.Delete("/paidairdrop/:id", controller.DeleteAirdropPaidByIDHandler)
+	
 }
