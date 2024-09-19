@@ -99,8 +99,57 @@ func GetAllAirdropHandler(c *fiber.Ctx) error {
 	})
 }
 
+func GetAirdropFreeByNameHandler(c *fiber.Ctx) error {
+    name := c.Params("name")
+    
+    data, err := airdrop.GetAirdropFreeByName(name)
+    if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to retrieve AirdropFree by Name",
+        })
+    }
+    
+    if len(data) == 0 {
+        return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+            "message": "No AirdropFree found with the specified name",
+        })
+    }
+    
+    return c.JSON(fiber.Map{
+        "message": "Data retrieved successfully",
+        "data":    data,
+    })
+}
+
+func GetAirdropPaidByNameHandler(c *fiber.Ctx) error {
+    name := c.Params("name")
+    
+    data, err := airdrop.GetAirdropPaidByName(name)
+    if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to retrieve AirdropPaid by Name",
+        })
+    }
+    
+    if len(data) == 0 {
+        return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+            "message": "No AirdropPaid found with the specified name",
+        })
+    }
+    
+    return c.JSON(fiber.Map{
+        "message": "Data retrieved successfully",
+        "data":    data,
+    })
+}
+
 func InsertAirdropFreeHandler(c *fiber.Ctx) error {
-	var newAirdrop airdrop.AirdropFree
+	var newAirdrop struct {
+		Name  string `json:"name"`
+		Task  string `json:"task"`
+		Link  string `json:"link"`
+		Level string `json:"level"`
+	}
 
 	if err := c.BodyParser(&newAirdrop); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -108,7 +157,7 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	insertedID, err := airdrop.InsertAirdropFree(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link)
+	insertedID, err := airdrop.InsertAirdropFree(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link, newAirdrop.Level)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to insert AirdropFree",
@@ -117,7 +166,7 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 
 	if objectID, ok := insertedID.(primitive.ObjectID); ok {
 		return c.JSON(fiber.Map{
-			"message":    "AirdropFree inserted successfully",
+			"message":     "AirdropFree inserted successfully",
 			"inserted_id": objectID.Hex(),
 		})
 	}
@@ -128,7 +177,12 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 }
 
 func InsertAirdropPaidHandler(c *fiber.Ctx) error {
-	var newAirdrop airdrop.AirdropPaid
+	var newAirdrop struct {
+		Name  string `json:"name"`
+		Task  string `json:"task"`
+		Link  string `json:"link"`
+		Level string `json:"level"`
+	}
 
 	if err := c.BodyParser(&newAirdrop); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -136,7 +190,7 @@ func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	insertedID, err := airdrop.InsertAirdropPaid(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link)
+	insertedID, err := airdrop.InsertAirdropPaid(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link, newAirdrop.Level)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to insert AirdropPaid",
@@ -145,7 +199,7 @@ func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 
 	if objectID, ok := insertedID.(primitive.ObjectID); ok {
 		return c.JSON(fiber.Map{
-			"message":    "AirdropPaid inserted successfully",
+			"message":     "AirdropPaid inserted successfully",
 			"inserted_id": objectID.Hex(),
 		})
 	}
@@ -164,14 +218,19 @@ func UpdateAirdropFreeByIDHandler(c *fiber.Ctx) error {
         })
     }
 
-    var updateData airdrop.AirdropFree
+    var updateData struct {
+        Name  string `json:"name"`
+        Task  string `json:"task"`
+        Link  string `json:"link"`
+        Level string `json:"level"`
+    }
     if err := c.BodyParser(&updateData); err != nil {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
             "error": "Failed to parse request body",
         })
     }
 
-    err = airdrop.UpdateAirdropFreeByID(id, updateData.Name, updateData.Task, updateData.Link)
+    err = airdrop.UpdateAirdropFreeByID(id, updateData.Name, updateData.Task, updateData.Link, updateData.Level)
     if err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "error": "Failed to update AirdropFree by ID",
@@ -192,14 +251,19 @@ func UpdateAirdropPaidByIDHandler(c *fiber.Ctx) error {
         })
     }
 
-    var updateData airdrop.AirdropPaid
+    var updateData struct {
+        Name  string `json:"name"`
+        Task  string `json:"task"`
+        Link  string `json:"link"`
+        Level string `json:"level"`
+    }
     if err := c.BodyParser(&updateData); err != nil {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
             "error": "Failed to parse request body",
         })
     }
 
-    err = airdrop.UpdateAirdropPaidByID(id, updateData.Name, updateData.Task, updateData.Link)
+    err = airdrop.UpdateAirdropPaidByID(id, updateData.Name, updateData.Task, updateData.Link, updateData.Level)
     if err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "error": "Failed to update AirdropPaid by ID",
