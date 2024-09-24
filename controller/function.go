@@ -145,10 +145,19 @@ func GetAirdropPaidByNameHandler(c *fiber.Ctx) error {
 
 func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 	var newAirdrop struct {
-		Name  string `json:"name"`
-		Task  string `json:"task"`
-		Link  string `json:"link"`
-		Level string `json:"level"`
+		Name      string  `json:"name"`
+		Task      string  `json:"task"`
+		Link      string  `json:"link"`
+		Level     string  `json:"level"`
+		Status    string  `json:"status"`
+		Backed    string  `json:"backed"`
+		Funds     string  `json:"funds"`
+		MarketCap string  `json:"market_cap"`
+		Vesting   string  `json:"vesting"`
+		LinkClaim string `json:"link_claim"`
+		Price     float64 `json:"price"`
+		USDIncome int   `json:"usd_income"`
+		
 	}
 
 	if err := c.BodyParser(&newAirdrop); err != nil {
@@ -157,7 +166,21 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	insertedID, err := airdrop.InsertAirdropFree(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link, newAirdrop.Level)
+	insertedID, err := airdrop.InsertAirdropFree(
+		newAirdrop.Name,
+		newAirdrop.Task,
+		newAirdrop.Link,
+		newAirdrop.Level,
+		newAirdrop.Status,
+		newAirdrop.Backed,
+		newAirdrop.Funds,
+		newAirdrop.MarketCap,
+		newAirdrop.Vesting,
+		newAirdrop.LinkClaim,
+		newAirdrop.Price,
+		newAirdrop.USDIncome,
+		
+	)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to insert AirdropFree",
@@ -178,10 +201,18 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 
 func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 	var newAirdrop struct {
-		Name  string `json:"name"`
-		Task  string `json:"task"`
-		Link  string `json:"link"`
-		Level string `json:"level"`
+		Name      string  `json:"name"`
+		Task      string  `json:"task"`
+		Link      string  `json:"link"`
+		Level     string  `json:"level"`
+		Status    string  `json:"status"`
+		Backed    string  `json:"backed"`
+		Funds     string  `json:"funds"`
+		MarketCap string  `json:"market_cap"`
+		Vesting   string  `json:"vesting"`
+		LinkClaim string `json:"link_claim"`
+		Price     float64 `json:"price"`
+		USDIncome int   `json:"usd_income"`
 	}
 
 	if err := c.BodyParser(&newAirdrop); err != nil {
@@ -190,7 +221,21 @@ func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 		})
 	}
 
-	insertedID, err := airdrop.InsertAirdropPaid(newAirdrop.Name, newAirdrop.Task, newAirdrop.Link, newAirdrop.Level)
+	insertedID, err := airdrop.InsertAirdropPaid(
+		newAirdrop.Name,
+		newAirdrop.Task,
+		newAirdrop.Link,
+		newAirdrop.Level,
+		newAirdrop.Status,
+		newAirdrop.Backed,
+		newAirdrop.Funds,
+		newAirdrop.MarketCap,
+		newAirdrop.Vesting,
+		newAirdrop.LinkClaim,
+		newAirdrop.Price,
+		newAirdrop.USDIncome,
+
+	)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to insert AirdropPaid",
@@ -219,18 +264,43 @@ func UpdateAirdropFreeByIDHandler(c *fiber.Ctx) error {
     }
 
     var updateData struct {
-        Name  string `json:"name"`
-        Task  string `json:"task"`
-        Link  string `json:"link"`
-        Level string `json:"level"`
+        Name      string  `json:"name"`
+        Task      string  `json:"task"`
+        Link      string  `json:"link"`
+        Level     string  `json:"level"`
+        Status    string  `json:"status"`
+        Backed    string  `json:"backed"`
+        Funds     string  `json:"funds"`
+        MarketCap string  `json:"market_cap"`
+        Vesting   string  `json:"vesting"`
+		LinkClaim string  `json:"link_claim"`
+		Price     float64 `json:"price"`
+        USDIncome int     `json:"usd_income"`
+
     }
+
     if err := c.BodyParser(&updateData); err != nil {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
             "error": "Failed to parse request body",
         })
     }
 
-    err = airdrop.UpdateAirdropFreeByID(id, updateData.Name, updateData.Task, updateData.Link, updateData.Level)
+    err = airdrop.UpdateAirdropFreeByID(
+        id,
+        updateData.Name,
+        updateData.Task,
+        updateData.Link,
+        updateData.Level,
+        updateData.Status,
+        updateData.Backed,
+        updateData.Funds,
+        updateData.MarketCap,
+        updateData.Vesting,
+		updateData.LinkClaim,
+		updateData.Price,
+        updateData.USDIncome,
+        
+    )
     if err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "error": "Failed to update AirdropFree by ID",
@@ -252,18 +322,41 @@ func UpdateAirdropPaidByIDHandler(c *fiber.Ctx) error {
     }
 
     var updateData struct {
-        Name  string `json:"name"`
-        Task  string `json:"task"`
-        Link  string `json:"link"`
-        Level string `json:"level"`
+        Name      string  `json:"name"`
+        Task      string  `json:"task"`
+        Link      string  `json:"link"`
+        Level     string  `json:"level"`
+        Status    string  `json:"status"`
+        Backed    string  `json:"backed"`
+        Funds     string  `json:"funds"`
+        MarketCap string  `json:"market_cap"`
+        Vesting   string  `json:"vesting"`
+        LinkClaim string  `json:"link_claim"`
+        Price     float64 `json:"price"`
+        USDIncome int     `json:"usd_income"`
     }
+
     if err := c.BodyParser(&updateData); err != nil {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
             "error": "Failed to parse request body",
         })
     }
 
-    err = airdrop.UpdateAirdropPaidByID(id, updateData.Name, updateData.Task, updateData.Link, updateData.Level)
+    err = airdrop.UpdateAirdropPaidByID(
+        id,
+        updateData.Name,
+        updateData.Task,
+        updateData.Link,
+        updateData.Level,
+        updateData.Status,
+        updateData.Backed,
+        updateData.Funds,
+        updateData.MarketCap,
+        updateData.Vesting,
+        updateData.LinkClaim,
+        updateData.Price,
+        updateData.USDIncome,
+    )
     if err != nil {
         return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
             "error": "Failed to update AirdropPaid by ID",
