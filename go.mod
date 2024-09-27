@@ -5,7 +5,7 @@ go 1.22.3
 require (
 	github.com/aiteung/musik v0.0.5
 	github.com/gofiber/fiber/v2 v2.52.5
-	github.com/nekowawolf/pkg-airdrop v0.0.8
+	github.com/nekowawolf/pkg-airdrop v0.0.9
 	go.mau.fi/whatsmeow v0.0.0-20240828153534-8acde1ba8592
 	go.mongodb.org/mongo-driver v1.16.1
 )
