@@ -152,6 +152,7 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 		Status    string  `json:"status"`
 		Backed    string  `json:"backed"`
 		Funds     string  `json:"funds"`
+		Supply    string  `json:"Supply"`
 		MarketCap string  `json:"market_cap"`
 		Vesting   string  `json:"vesting"`
 		LinkClaim string `json:"link_claim"`
@@ -174,6 +175,7 @@ func InsertAirdropFreeHandler(c *fiber.Ctx) error {
 		newAirdrop.Status,
 		newAirdrop.Backed,
 		newAirdrop.Funds,
+		newAirdrop.Supply,
 		newAirdrop.MarketCap,
 		newAirdrop.Vesting,
 		newAirdrop.LinkClaim,
@@ -208,6 +210,7 @@ func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 		Status    string  `json:"status"`
 		Backed    string  `json:"backed"`
 		Funds     string  `json:"funds"`
+		Supply    string  `json:"Supply"`
 		MarketCap string  `json:"market_cap"`
 		Vesting   string  `json:"vesting"`
 		LinkClaim string `json:"link_claim"`
@@ -229,6 +232,7 @@ func InsertAirdropPaidHandler(c *fiber.Ctx) error {
 		newAirdrop.Status,
 		newAirdrop.Backed,
 		newAirdrop.Funds,
+		newAirdrop.Supply,
 		newAirdrop.MarketCap,
 		newAirdrop.Vesting,
 		newAirdrop.LinkClaim,
@@ -271,6 +275,7 @@ func UpdateAirdropFreeByIDHandler(c *fiber.Ctx) error {
         Status    string  `json:"status"`
         Backed    string  `json:"backed"`
         Funds     string  `json:"funds"`
+		Supply    string  `json:"Supply"`
         MarketCap string  `json:"market_cap"`
         Vesting   string  `json:"vesting"`
 		LinkClaim string  `json:"link_claim"`
@@ -294,6 +299,7 @@ func UpdateAirdropFreeByIDHandler(c *fiber.Ctx) error {
         updateData.Status,
         updateData.Backed,
         updateData.Funds,
+		updateData.Supply,
         updateData.MarketCap,
         updateData.Vesting,
 		updateData.LinkClaim,
@@ -329,6 +335,7 @@ func UpdateAirdropPaidByIDHandler(c *fiber.Ctx) error {
         Status    string  `json:"status"`
         Backed    string  `json:"backed"`
         Funds     string  `json:"funds"`
+		Supply    string  `json:"Supply"`
         MarketCap string  `json:"market_cap"`
         Vesting   string  `json:"vesting"`
         LinkClaim string  `json:"link_claim"`
@@ -351,6 +358,7 @@ func UpdateAirdropPaidByIDHandler(c *fiber.Ctx) error {
         updateData.Status,
         updateData.Backed,
         updateData.Funds,
+		updateData.Supply,
         updateData.MarketCap,
         updateData.Vesting,
         updateData.LinkClaim,
