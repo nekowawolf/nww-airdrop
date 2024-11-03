@@ -32,6 +32,8 @@ github.com/montanaflynn/stats v0.7.1 h1:etflOAAHORrCC44V+aR6Ftzort912ZU+YLiSTuV8
 github.com/montanaflynn/stats v0.7.1/go.mod h1:etXPPgVO6n31NxCd9KQUMvCM+ve0ruNzt6R8Bnaayow=
 github.com/nekowawolf/pkg-airdrop v0.0.9 h1:EYzCo6aOofvcvzpDZeRn/U0/TlpBv9nu5/Lyo1jGxF4=
 github.com/nekowawolf/pkg-airdrop v0.0.9/go.mod h1:GrH9iMRCorbqAQxhGteWKDIKicPutvs4lDw1dq4lnao=
+github.com/nekowawolf/pkg-airdrop v0.0.10 h1:ErjiADNvD7gzxlhtt1bcU4MrWONNhdRB7WOq5bkoTOM=
+github.com/nekowawolf/pkg-airdrop v0.0.10/go.mod h1:GrH9iMRCorbqAQxhGteWKDIKicPutvs4lDw1dq4lnao=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
