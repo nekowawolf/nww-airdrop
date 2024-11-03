@@ -21,6 +21,7 @@ func Web(page *fiber.App) {
 	page.Get("/allairdrop", controller.GetAllAirdropHandler)
 	page.Get("/freeairdrop/:id", controller.GetAirdropFreeByIDHandler)
 	page.Get("/paidairdrop/:id", controller.GetAirdropPaidByIDHandler)
+	page.Get("/allairdrop/search/:name", controller.GetAllAirdropByNameHandler)
 	page.Get("/freeairdrop/search/:name", controller.GetAirdropFreeByNameHandler)
 	page.Get("/paidairdrop/search/:name", controller.GetAirdropPaidByNameHandler)
 	page.Post("/freeairdrop", controller.InsertAirdropFreeHandler)
