@@ -99,6 +99,28 @@ func GetAllAirdropHandler(c *fiber.Ctx) error {
 	})
 }
 
+func GetAllAirdropByNameHandler(c *fiber.Ctx) error {
+    name := c.Params("name")
+    
+    data, err := airdrop.GetAllAirdropByName(name)
+    if err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Failed to retrieve Airdrop by Name",
+        })
+    }
+    
+    if len(data) == 0 {
+        return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+            "message": "No Airdrop found with the specified name",
+        })
+    }
+    
+    return c.JSON(fiber.Map{
+        "message": "Data retrieved successfully",
+        "data":    data,
+    })
+}
+
 func GetAirdropFreeByNameHandler(c *fiber.Ctx) error {
     name := c.Params("name")
     
